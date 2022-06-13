@@ -83,6 +83,8 @@ func (s *LogFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 		currFileFullPath := filepath.Dir(entry.Caller.File)
 		currFile := filepath.Base(entry.Caller.File)
 		currExecDirPath := currFileFullPath[len(currExecFullDirPath):]
+		fmt.Println(currFileFullPath)
+		fmt.Println(currExecFullDirPath)
 
 		file = filepath.Join(currExecDirPath, currFile)[1:]
 		line = entry.Caller.Line
