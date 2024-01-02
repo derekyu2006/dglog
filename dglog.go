@@ -84,11 +84,15 @@ func (s *LogFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 	}
 
 	level := s.getLevel(entry)
-	msg := fmt.Sprintf("%s [%s] %-120s [%s:%d]\n", timestamp, level, entry.Message, file, line)
+	msg := fmt.Sprintf("%s %s [%s:%d] %s\n", timestamp, level, file, line, entry.Message)
 	return []byte(msg), nil
 }
 
 func (s *LogFormatter) getLevel(entry *logrus.Entry) string {
+	return strings.ToUpper(entry.Level.String())[:1]
+}
+
+func (s *LogFormatter) getLevelColor(entry *logrus.Entry) string {
 	defaultColorScheme := &ColorScheme{
 		InfoLevelStyle:  "white",
 		WarnLevelStyle:  "yellow",
